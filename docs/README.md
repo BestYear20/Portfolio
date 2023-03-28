@@ -25,34 +25,28 @@ I am a **Full-Stack** ROBLOX developer from Poland :poland:. I have **over 5 yea
 
 # Modular Scripting
 
+Modular scripting allows faster and cleaner workflow by reusing same function from multiple different sources which makes applying any changes/fixes easier.
+
 ?> I work with mainstream frameworks and modules which helps other programmers edit and add new features to my existing work. On top of that my code is clear and easy to understand even for beginners.
 
-## Example Modules
+## Knit
 
-### 1. Knit
+**Knit** is a ROBLOX game framework which makes communication between client and server alot faster to code by avoiding creating remote events manually. Most ROBLOX programmers use `Knit` which makes it perfect framework for big projects with multiple programmers.
 
----
-
-#### Creating Service
-
-```text
-└── ServerScriptService
-    └── Game
-        └── Services
-            ├── TexturesService.lua
-            └── ... 
-```
+### Creating Service
 ```lua
 -- [[ Service ]] --
 local ServerService = Knit.CreateService {
 	Name = script.Name;
 	TexturesPerPlayer = {};
-	Client = {};
+	Client = {
+        UpdateTexture = Knit.CreateSignal();
+        Texture = Knit.CreateProperty(1);
+    };
 }
 ```
 
-
-?> Here is piece of code allowing client to get `textures` player owns straight from server.
+### Service Functions
 
 ```lua
 function ServerService:GetUnlockedTextures(player)
@@ -63,3 +57,63 @@ function ServerService.Client:GetUnlockedTextures(player)
 	return self.Server:GetUnlockedTextures(player)
 end
 ```
+### Service Initialization
+```lua
+function ServerService:KnitStart()
+	-- [[ Services ]] --
+	DataManager = Knit.GetService("DataManager")
+	-- [[ Setup ]] --
+	local function onPlayerAdded(player)
+		self.TexturesPerPlayer[player] = {TextureId = 1}
+	end
+	local function onPlayerRemoving(player)
+		self.TexturesPerPlayer[player] = nil
+	end
+	-- [[ Init ]] --
+	for _,player in ipairs(Players:GetPlayers()) do
+		coroutine.wrap(onPlayerAdded)(player)
+	end
+	Players.PlayerAdded:Connect(onPlayerAdded)
+	Players.PlayerRemoving:Connect(onPlayerRemoving)
+end
+
+return ServerService
+```
+
+## Profile Service
+
+## BigNum
+
+**BigNum** allows you to store numbers as a `128-bit` signed integer, which pretty much eliminates the issue with `64-bit` signed integer limiting highest number that can be stored by server.
+
+`64-bit` signed int cannot be higher than `9,223,372,036,854,775,807` which isnt the case for `128-bit`.
+
+### Operations on BigNum Values
+```lua
+function ServerService:GiveCurrency(player, amount, skipGamepass)
+	local data = DataManager:getData(player)
+	if not skipGamepass and table.find(ReciptsHandler.Gamepasses[player], "Double_Coins") then
+		amount = tostring(BigNum.new(amount) * BigNum.new(2))
+	end
+	data.GameData.values.coins = tostring(BigNum.new(data.GameData.values.coins) + BigNum.new(amount))
+	DataManager:Replicate(player)
+	self.Client.Coins:SetFor(player, data.GameData.values.coins)
+	self.Client.CoinFX:Fire(player, amount)
+end
+```
+
+## FormatNumber
+
+## Roact *(soon)*
+
+# IDE And Version Management
+
+?> **IDE:** `Visual Studio Code`.
+
+?> **Version Management:** `Git` workflow which allows me to work with other programmers without interrupting them in unnecessary ways.
+
+> I can use `Rojo` if I am the committing programmer or working solo.
+
+# Math
+
+## Functions

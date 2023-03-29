@@ -9,11 +9,13 @@ I am a **Full-Stack** ROBLOX developer from Poland :poland:. I have **over 5 yea
 ### Payment
 - Pay Range
   - **Per Hour:** $50/h **-** $70/h
-  - **Per Task:** $350+ **/** R$100,000+
+  - **Paid Per Task:** $100+ **/** R$30,000+
 - Payment Methods
   - **Crypto -** *(10% OFF)* **BTC, ETH, XMR, USDC, USDT**
   - **PayPal -** *(F&F)*
   - **Robux -** *(devex rates)* **Group Payout**
+
+!> **Minimum Order:** $350 **/** R$100,000
 
 ---
 

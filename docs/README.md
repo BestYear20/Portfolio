@@ -2,7 +2,7 @@
 
 ## About Me
 
-I am a **Full-Stack** ROBLOX developer from Poland :poland:. I have **over 5 years** of programming experience. My timezone is `GMT+1`. I also code in `JS`, `TS` and `C#`.
+I am a **Full-Stack** lua **programmer** from Poland :poland:. I have **over 5 years** of programming experience. My timezone is `GMT+1`. I also code in `JS`, `TS` and `C#`.
 
 ## Informations
 

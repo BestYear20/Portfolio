@@ -84,11 +84,95 @@ return ServerService
 
 ## Profile Service
 
+**Profile Service** handles storing data on roblox servers, it prevents writing data from multiple servers at once which prevents duplicating items.
+
+### Default Data Module
+This module will be used as template for creating player data and storing it.
+```lua
+return {
+	GameData = {
+		["_Security"] = {
+			rank = "Player";
+			warns = {};
+			permBanned = false;
+			tempBanned = 0;
+			verifiedTwitter = false
+		};
+		
+		["_Values"] = {
+			cash = "0";
+			silver = "0";
+			level = "1";
+			experience = "0";
+		};
+		
+		["_Settings"] = {
+			lowDetail = false;
+			showOthersBackpack = false;
+			showOthersPets = false;
+			sfx = 0.5;
+			music = 0.5;
+		};
+
+		-- ... --
+	};
+}
+```
+### Replicating Data
+Data is stored on server but for faster access to it on client it's good to replicate some insensitive data onto client.
+Another thing is creating leaderstats with scores which has to be updated live as values change.
+```lua
+-- replicate leaderstats function
+if not leaderstatsCreated[Player] then leaderstatsCreated[Player] = {} end
+	for Stat, Value in pairs(PlayerProfile.GameData._Values) do
+		if table.find(OnLeaderstats, Stat) then
+			if not leaderstatsCreated[Player][Stat] then
+				local NewValue = Instance.new("StringValue")
+				NewValue.Name = (Stat:gsub("^%l", string.upper))
+				NewValue.Value = formatter:Format(tonumber(Value))
+				NewValue.Parent = Player:WaitForChild("leaderstats")
+					
+				leaderstatsCreated[Player][Stat] = {
+					["Instace"] = NewValue
+				}
+					
+			elseif leaderstatsCreated[Player][Stat] then
+				leaderstatsCreated[Player][Stat].Instace.Value = formatter:Format(tonumber(Value))
+			end
+		end
+	end
+end
+```
+### Global Events
+**Profile Service** also helps with handling global events which are used for creating systems of gifting itmes to offline players or trading with players on different servers.
+```lua
+--get global updates
+local globalUpdates = PlayerProfile.GlobalUpdates
+--get all already exisisting active updates
+for i,update in ipairs(globalUpdates:GetActiveUpdates()) do
+	globalUpdates:LockActiveUpdate(update[1])
+end
+--get all already exisisting locked updates
+for i,update in ipairs(globalUpdates:GetLockedUpdates()) do
+	handleLockedUpdate(globalUpdates, update)
+end
+--listen for new active updates
+globalUpdates:ListenToNewActiveUpdate(function(id, data)
+	local update = {id, data}
+	globalUpdates:LockActiveUpdate(update[1])
+end)
+--listen for new locked updates	
+globalUpdates:ListenToNewLockedUpdate(function(id, data)
+	local update = {id, data}
+	handleLockedUpdate(globalUpdates, update)
+end)
+```
+
 ## BigNum
 
 **BigNum** allows you to store numbers as a `128-bit` signed integer, which pretty much eliminates the issue with `64-bit` signed integer limiting highest number that can be stored by server.
 
-`64-bit` signed int cannot be higher than `9,223,372,036,854,775,807` which isnt the case for `128-bit`.
+`64-bit` signed int cannot be higher than `9,223,372,036,854,775,807` or lower than `-9,223,372,036,854,775,807` which isnt the case for `128-bit`.
 
 ### Operations on BigNum Values
 ```lua

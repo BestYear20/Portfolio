@@ -11,7 +11,7 @@ I am a **Full-Stack** lua **programmer** from Poland :poland:. I have **over 5 y
   - **Per Hour:** $50/h **-** $70/h
   - **Paid Per Task:** $100+ **/** R$30,000+
 - Payment Methods
-  - **Crypto -** *(10% OFF)* **BTC, ETH, XMR, USDC, USDT**
+  - **Crypto -** *(10% OFF)* **BTC, ETH, XMR, USDC, USDT, SOL, BNB**
   - **PayPal -** *(F&F)*
   - **Robux -** *(devex rates)* **Group Payout**
 
@@ -106,6 +106,23 @@ end
 
 ## FormatNumber
 
+### Formatting
+**Format Number** is slightly more advanced method of formatting numbers which allows you to work on numbers higher than `64-bit` numbers. Used for all sorts of games in order to display numbers easily readable by players.
+```lua
+local abbreviations = FormatNumber.Notation.compactWithSuffixThousands({
+	"k", "M", "B", "T", "qd", "qn", "sx", "sp", "o", "n", "d", "ud", "dd", "td", "qtd", "qnd", "sxd", "spd", "od", "nd", "vg",
+})
+local formatter = FormatNumber.NumberFormatter.with():Notation(abbreviations):Precision(FormatNumber.Precision.integer():WithMinDigits(3))
+```
+
+| Not Formatted Number |  | Formatted Number |
+| :----------: |:------------:| :-----------:|
+| **6000**         | <kbd>&rarr;</kbd>           | **6k**          |
+| **9530**         | <kbd>&rarr;</kbd>           | **9.53k**          |
+| **3562344845**         | <kbd>&rarr;</kbd>           | **3.56B**          |
+| **546563434484554554645**         | <kbd>&rarr;</kbd>           | **546qn**          |
+
+
 ## Roact *(soon)*
 
 # IDE And Version Management
@@ -116,6 +133,6 @@ end
 
 > I can use `Rojo` if I am the committing programmer or working solo.
 
-# Math
+# Math *(soon)*
 
 ## Functions

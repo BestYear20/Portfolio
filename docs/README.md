@@ -2,18 +2,20 @@
 
 ## About Me
 
-I am a **Full-Stack** lua **programmer** from Poland :poland:. I have **over 5 years** of programming experience. My timezone is `GMT+1`. I also code in `JS`, `TS` and `C#`.
+I am a **Full-Stack** lua **programmer** from Poland. I have **over 5 years** of programming experience. My timezone is `GMT+1`. I also code in `JS`, `TS` and `C#`.
 
 ## Informations
 
 ### Payment
 - Pay Range
-  - **Per Hour:** $50/h **-** $70/h
-  - **Paid Per Task:** $100+ **/** R$30,000+
+  - **Per Hour:** $25/h **-** $50/h
+  - **Paid Per Task:** $100+
 - Payment Methods
   - **Crypto -** *(10% OFF)* **BTC, ETH, XMR, USDC, USDT, SOL, BNB**
   - **PayPal -** *(F&F)*
   - **Robux -** *(devex rates)* **Group Payout**
+
+?> **50% Upfront**
 
 !> **Minimum Order:** $350 **/** R$100,000
 
@@ -21,21 +23,23 @@ I am a **Full-Stack** lua **programmer** from Poland :poland:. I have **over 5 y
 
 ### Contact
 - Discord
-  - **LD#6019** `972018685826981918`
+  - **l_dv** `972018685826981918`
 - Twitter
   - **@LDev_ROBLOX**
 
-# Modular Scripting
+# Object Oriented Programming
 
-Modular scripting allows faster and cleaner workflow by reusing same function from multiple different sources which makes applying any changes/fixes easier.
+Object Oriented Programming (OOP) allows faster and cleaner workflow by reusing same function from multiple different sources which makes applying any changes/fixes easier.
+
+## Frameworks
 
 ?> I work with mainstream frameworks and modules which helps other programmers edit and add new features to my existing work. On top of that my code is clear and easy to understand even for beginners.
 
-## Knit
+### Knit
 
 **Knit** is a ROBLOX game framework which makes communication between client and server alot faster to code by avoiding creating remote events manually. Most ROBLOX programmers use `Knit` which makes it perfect framework for big projects with multiple programmers.
 
-### Creating Service
+#### Creating Service
 ```lua
 -- [[ Service ]] --
 local ServerService = Knit.CreateService {
@@ -47,9 +51,7 @@ local ServerService = Knit.CreateService {
     };
 }
 ```
-
-### Service Functions
-
+#### Service Functions
 ```lua
 function ServerService:GetUnlockedTextures(player)
 	return DataManager:getData(player).GameData.textures
@@ -59,7 +61,7 @@ function ServerService.Client:GetUnlockedTextures(player)
 	return self.Server:GetUnlockedTextures(player)
 end
 ```
-### Service Initialization
+#### Service Initialization
 ```lua
 function ServerService:KnitStart()
 	-- [[ Services ]] --
@@ -82,11 +84,45 @@ end
 return ServerService
 ```
 
-## Profile Service
+## Front-End Programming
+
+**Front-End** is the client-sided code which includes: `animations`,`visual effects`,`sound effects`,`user interface`and more. Well written client-sided code results in better performace. Alot of server-sided systems can be moved to client in order to lower network traffic, make animations smoother and improve server performance.
+
+### Custom Healthbars
+
+**Custom Healthbars** - interactive, efficient and customizable `module` enhancing the looks of healthbars.
+
+[filename](_media/healthbars.mp4 ':include :type=video controls width=100%')
+
+### FormatNumber
+
+#### Formatting
+**Format Number** helps with advanced and fast formatting of numbers. Used for all sorts of games in order to display numbers easily readable by players. Works along `BigNum` module.
+```lua
+local abbreviations = FormatNumber.Notation.compactWithSuffixThousands({
+	"k", "M", "B", "T", "qd", "qn", "sx", "sp", "o", "n", "d", "ud", "dd", "td", "qtd", "qnd", "sxd", "spd", "od", "nd", "vg",
+})
+local formatter = FormatNumber.NumberFormatter.with():Notation(abbreviations):Precision(FormatNumber.Precision.integer():WithMinDigits(3))
+```
+
+| Not Formatted Number |  | Formatted Number |
+| :----------: |:------------:| :-----------:|
+| **6000**         | <kbd>&rarr;</kbd>           | **6k**          |
+| **9530**         | <kbd>&rarr;</kbd>           | **9.53k**          |
+| **3562344845**         | <kbd>&rarr;</kbd>           | **3.56B**          |
+| **546563434484554554645**         | <kbd>&rarr;</kbd>           | **546qn**          |
+
+### Roact *(soon)*
+
+## Back-End Programming
+
+**Back-End** is the server-sided code which includes: `data storing`,`managing currencies`,`setting up gameplay` and more. Well written server-sided code results in better server performace. 
+
+### Profile Service
 
 **Profile Service** handles storing data on roblox servers, it prevents writing data from multiple servers at once which prevents duplicating items.
 
-### Default Data Module
+#### Default Data Module
 This module will be used as template for creating player data and storing it.
 ```lua
 return {
@@ -113,16 +149,14 @@ return {
 			sfx = 0.5;
 			music = 0.5;
 		};
-
-		-- ... --
 	};
 }
 ```
-### Replicating Data
+#### Replicating Data
 Data is stored on server but for faster access to it on client it's good to replicate some insensitive data onto client.
 Another thing is creating leaderstats with scores which has to be updated live as values change.
 ```lua
--- replicate leaderstats function
+--replicate leaderstats
 if not leaderstatsCreated[Player] then leaderstatsCreated[Player] = {} end
 	for Stat, Value in pairs(PlayerProfile.GameData._Values) do
 		if table.find(OnLeaderstats, Stat) then
@@ -143,7 +177,7 @@ if not leaderstatsCreated[Player] then leaderstatsCreated[Player] = {} end
 	end
 end
 ```
-### Global Events
+#### Global Events
 **Profile Service** also helps with handling global events which are used for creating systems of gifting itmes to offline players or trading with players on different servers.
 ```lua
 --get global updates
@@ -168,13 +202,13 @@ globalUpdates:ListenToNewLockedUpdate(function(id, data)
 end)
 ```
 
-## BigNum
+### BigNum
 
-**BigNum** allows you to store numbers as a `128-bit` signed integer, which pretty much eliminates the issue with `64-bit` signed integer limiting highest number that can be stored by server.
+**BigNum** allows you to store as well as perform operations on `128-bit` numbers, which pretty much eliminates the issue with `64-bit` numbers limiting highest number that can be stored and operated on by server.
 
 `64-bit` signed int cannot be higher than `9,223,372,036,854,775,807` or lower than `-9,223,372,036,854,775,807` which isnt the case for `128-bit`.
 
-### Operations on BigNum Values
+#### Operations on BigNum Values
 ```lua
 function ServerService:GiveCurrency(player, amount, skipGamepass)
 	local data = DataManager:getData(player)
@@ -187,27 +221,6 @@ function ServerService:GiveCurrency(player, amount, skipGamepass)
 	self.Client.CoinFX:Fire(player, amount)
 end
 ```
-
-## FormatNumber
-
-### Formatting
-**Format Number** is slightly more advanced method of formatting numbers which allows you to work on numbers higher than `64-bit` numbers. Used for all sorts of games in order to display numbers easily readable by players.
-```lua
-local abbreviations = FormatNumber.Notation.compactWithSuffixThousands({
-	"k", "M", "B", "T", "qd", "qn", "sx", "sp", "o", "n", "d", "ud", "dd", "td", "qtd", "qnd", "sxd", "spd", "od", "nd", "vg",
-})
-local formatter = FormatNumber.NumberFormatter.with():Notation(abbreviations):Precision(FormatNumber.Precision.integer():WithMinDigits(3))
-```
-
-| Not Formatted Number |  | Formatted Number |
-| :----------: |:------------:| :-----------:|
-| **6000**         | <kbd>&rarr;</kbd>           | **6k**          |
-| **9530**         | <kbd>&rarr;</kbd>           | **9.53k**          |
-| **3562344845**         | <kbd>&rarr;</kbd>           | **3.56B**          |
-| **546563434484554554645**         | <kbd>&rarr;</kbd>           | **546qn**          |
-
-
-## Roact *(soon)*
 
 # IDE And Version Management
 

@@ -94,6 +94,18 @@ return ServerService
 
 [filename](_media/healthbars.mp4 ':include :type=video controls width=100%')
 
+### Quests System
+
+**Quests System** - well animated and functional quests system used in my game `Lumber Legends`
+
+[filename](_media/user_interface_1.mp4 ':include :type=video controls width=100%')
+
+### In-Game Purchases Handler
+
+**In-Game Purchases Handler** - hides unnecessary UI elements, which helps player focus on the purchase.
+
+[filename](_media/purchase_handling.mp4 ':include :type=video controls width=100%')
+
 ### FormatNumber
 
 #### Formatting

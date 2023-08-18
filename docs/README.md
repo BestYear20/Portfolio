@@ -4,6 +4,11 @@
 
 I am a **Full-Stack** lua **programmer** from Poland. I have **over 5 years** of programming experience. My timezone is `GMT+1`. I also code in `JS`, `TS` and `C#`.
 
+## Impersonators
+
+!> ALWAYS MAKE SURE THAT YOU ARE TALKING TO THE RIGHT PERSON! MAKE SURE DISCORD ACCOUNT YOU ARE DEALING WITH HAS CORRECT ID: `972018685826981918`. I THIS CASE BOTH BADGES, DESCRIPTION AND MY BANNER COLOR WERE ALL COPIED, ONLY DIFFERENCE IS THE ID AND THE . (dot) IN THE USERNAME.
+<img src='_media/impersonator_1.png' style="width: 100%"></img>
+
 ## Informations
 
 ### Payment
